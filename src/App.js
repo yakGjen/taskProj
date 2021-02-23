@@ -3,6 +3,14 @@ import { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
 
+import SwiperCore, { Navigation, Pagination } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/swiper.scss';
+import 'swiper/components/navigation/navigation.scss';
+import 'swiper/components/pagination/pagination.scss';
+
+SwiperCore.use([Navigation, Pagination]);
+
 const App = () => {
   // const [boards, setBoards] = useState([
   //   {id: 1, title: 'Задачи', items: [
@@ -80,8 +88,6 @@ const App = () => {
 
     const arr = newTask.getAll('username');
 
-    console.log('newTask', arr);
-
     fetch('https://uxcandy.com/~shapoval/test-task-backend/v2/create?developer=Evgeniy', {
       method: 'POST',
       mode: 'cors',
@@ -119,34 +125,12 @@ const App = () => {
 
   return (
     <div className='app'>
-      <div className='top-bar'>
-        <button onClick={openModal}>Создать задачу</button>
-      </div>
-      <h1 className='header'>Задачи</h1>
-      <div className='tasks'>
-        {board.tasks.map(task => 
-          <div className='task'>
-            <p className='task__point'>Имя:</p>
-            <p className='task__name'>{task.username}</p>
-
-            <p className='task__point'>Email:</p>
-            <p className='task__email'>{task.email}</p>
-
-            <p className='task__point'>Текст:</p>
-            <p className='task__text'>{task.text}</p>
-
-            <p className='task__point'>Статус задачи:</p>
-            <p className='task__status'>{task.status}</p>
-          </div>  
-        )}
-      </div>
-
       <Modal
           isOpen={modalIsOpen}
           onRequestClose={closeModal}
           contentLabel="Example Modal"
           className='new-task'
-        >
+      >
  
           {/* <h2 ref={_subtitle => (subtitle = _subtitle)}>Hello</h2> */}
           <button 
@@ -163,6 +147,56 @@ const App = () => {
             <button onClick={sendNewTask} className='new-task__form-item'>Создать задачу</button>
           </form>
         </Modal>
+
+      <div className='top-bar'>
+        <button onClick={openModal}>Создать задачу</button>
+      </div>
+      <h1 className='header'>Задачи</h1>
+      <div className='tasks'>
+        <Swiper
+          spaceBetween={55}
+          slidesPerView={3}
+          navigation
+          pagination={{ clickable: true }}
+          onSlideChange={() => console.log('slide change')}
+          onSwiper={(swiper) => console.log(swiper)}
+        >
+          {board.tasks.map(task => 
+            <SwiperSlide>
+              <div className='task'>
+                <p className='task__point'>Имя:</p>
+                <p className='task__name'>{task.username}</p>
+
+                <p className='task__point'>Email:</p>
+                <p className='task__email'>{task.email}</p>
+
+                <p className='task__point'>Текст:</p>
+                <p className='task__text'>{task.text}</p>
+
+                <p className='task__point'>Статус задачи:</p>
+                <p className='task__status'>{task.status}</p>
+              </div>
+            </SwiperSlide>
+          )}
+        </Swiper>
+        {/* {board.tasks.map(task => 
+          <div className='task'>
+            <p className='task__point'>Имя:</p>
+            <p className='task__name'>{task.username}</p>
+
+            <p className='task__point'>Email:</p>
+            <p className='task__email'>{task.email}</p>
+
+            <p className='task__point'>Текст:</p>
+            <p className='task__text'>{task.text}</p>
+
+            <p className='task__point'>Статус задачи:</p>
+            <p className='task__status'>{task.status}</p>
+          </div>
+        )} */}
+      </div>
+
+      
       {/*boards.map(board => 
         <div 
           onDragOver={(e) => dragOverHandler(e)}

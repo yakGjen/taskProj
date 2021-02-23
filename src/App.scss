@@ -1,5 +1,24 @@
+html {
+  overflow: hidden;
+}
+
 button {
   cursor: pointer;
+}
+
+.swiper-button-prev {
+  left: -30px !important;
+}
+.swiper-button-next {
+  right: -30px !important;
+}
+.swiper-pagination-bullets {
+  // position: relative !important;
+  bottom: -20px !important;
+}
+.swiper-container {
+  overflow: visible !important;
+  // overflow-x: hidden !important;
 }
 
 .app {
@@ -14,13 +33,17 @@ button {
 }
 
 .tasks {
-  width: 100%;
-  display: flex;
-  justify-content: space-around;
+  width: 90%;
+  margin: 0 auto;
+  // padding: 0 50px;
+  // box-sizing: border-box;
+  // display: flex;
+  // justify-content: space-around;
 }
 
 .task {
-  width: 30%;
+  width: 100%;
+  // width: 30%;
   padding: 5px 10px;
   box-sizing: border-box;
   border: solid 1px #000000;
@@ -32,15 +55,20 @@ button {
   }
 }
 
+.ReactModal__Overlay {
+  z-index: 10000;
+}
+
 .new-task {
   width: 50%;
   padding: 15px;
   box-sizing: border-box;
-  position: absolute;
+  position: fixed;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  background-color: #ffffff;
+  z-index: 10000;
+  background-color: #ffffff !important;
   border: solid 2px #000000;
   border-radius: 5px;
   outline: none;
