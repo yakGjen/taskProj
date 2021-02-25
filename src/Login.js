@@ -35,7 +35,6 @@ const Login = ({logIn}) => {
           >
             Вернуться на главную
           </Link>
-          {/* <button className='login-card__item'>Вернуться на главную</button> */}
         </div>
       </div>
     </div>

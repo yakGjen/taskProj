@@ -1,3 +1,5 @@
+@import 'reset-css';
+
 html {
   overflow: hidden;
 }
@@ -6,26 +8,8 @@ button {
   cursor: pointer;
 }
 
-.swiper-button-prev {
-  left: -30px !important;
-}
-.swiper-button-next {
-  right: -30px !important;
-}
-.swiper-pagination-bullets {
-  // position: relative !important;
-  bottom: -20px !important;
-}
-.swiper-container {
-  overflow: visible !important;
-  // overflow-x: hidden !important;
-}
-
 .app {
   min-height: 100vh;
-  // display: flex;
-  // justify-content: space-around;
-  // align-items: center;
 }
 
 .top-bar {
@@ -33,24 +17,42 @@ button {
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
+
+  &__login-section {
+    display: flex;
+    align-items: center;
+
+    p {
+      margin: 0;
+      margin-right: 20px;
+    }
+  }
+}
+
+.sorting {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  button {
+    margin-left: 15px;
+  }
 }
 
 .header {
+  margin: 30px 0;
   text-align: center;
+  font-size: 36px;
+  font-weight: bold;
 }
 
 .tasks {
   width: 90%;
   margin: 0 auto;
-  // padding: 0 50px;
-  // box-sizing: border-box;
-  // display: flex;
-  // justify-content: space-around;
 }
 
 .task {
-  // width: 100%;
-  // width: 30%;
+  width: 95%;
   padding: 5px 10px;
   box-sizing: border-box;
   border: solid 1px #000000;
@@ -68,13 +70,13 @@ button {
     border: none;
   }
 
+  select {
+    width: 100%;
+  }
+
   &__save-wrap {
     text-align: center;
   }
-}
-
-.ReactModal__Overlay {
-  z-index: 1000;
 }
 
 .new-task {
@@ -91,9 +93,21 @@ button {
   border-radius: 5px;
   outline: none;
 
+  h3 {
+    margin: 15px 0;
+    font-size: 24px;
+    font-weight: bold;
+  }
+
   &__form {
     display: flex;
     flex-direction: column;
+
+    input,
+    textarea {
+      border: solid 1px #000000;
+      border-radius: 3px;
+    }
 
     textarea {
       resize: none;
@@ -104,9 +118,17 @@ button {
     padding: 3px 5px;
     box-sizing: border-box;
 
-    &:not(:last-child) {
-      margin-bottom: 10px;
+    &:not(:first-child) {
+      margin-top: 3px;
     }
+    &:not(:last-child) {
+      margin-bottom: 7px;
+    }
+  }
+
+  &__close {
+    position: absolute;
+    right: 20px;
   }
 }
 

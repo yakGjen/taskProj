@@ -7,6 +7,10 @@ const App = () => {
   const [logInToken, setNewToken] = useState('');
   const [logged, setLogged] = useState(false);
 
+  const [board, setBoard] = useState({
+    tasks: []
+  });
+
   const logIn = (loginValue, passwordValue) => {
     let logInData = new FormData();
     logInData.append("username", loginValue);
@@ -24,13 +28,28 @@ const App = () => {
       if (data.status === 'ok') {
         setNewToken(data.message.token);
         setLogged(true);
+      } else {
+        alert(data.message);
       }
     });
   }
 
+  const logOut = (e) => {
+    e.preventDefault();
+    setLogged(false);
+  };
+
   return (
     <BrowserRouter>
-      <Route exact path="/" render={() => <Home logged={logged} logInToken={logInToken} />} />
+      <Route exact path="/" render={
+        () => <Home 
+            logged={logged} 
+            logInToken={logInToken} 
+            logOut={logOut} 
+            board={board}
+            setBoard={setBoard}
+          />
+      } />
       <Route exact path="/login" render={() => <Login logIn={logIn} />} />
       {logInToken ? <Redirect from="/login" to='/'/> : null}
     </BrowserRouter>
